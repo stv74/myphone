@@ -73,7 +73,7 @@
 						$logo_img = '';
 						$custom_logo_id = get_theme_mod( 'custom_logo' );
 						
-						if( $custom_logo_id ){
+						if ( $custom_logo_id ) {
 							$logo_img = wp_get_attachment_image( $custom_logo_id, 'full', false, array(
 								'class'    => 'custom-logo',
 								'itemprop' => 'logo',
@@ -84,58 +84,40 @@
 						?>
 					</div>
 
+					<?php if ( get_field( 'footer_descr', 14 ) ) : ?>
+						<div class="footer__text">
+							<?php the_field( 'footer_descr', 14 ); ?>
+						</div>
 					<?php
-					if ( get_field( 'footer_descr', 14 ) ) {
-						?>
-							<div class="footer__text">
-								<?php the_field( 'footer_descr', 14 ) ?>
-							</div>						
-						<?php
-					}
-					print_r(get_field('social_links'));
-					the_field( 'social_links_facebook_link' );
-					the_field( 'footer_descr-site' );
-					// if ( get_post_meta( 14, 'footer_descr-site', true ) ) {
+					endif;
 
-					// }
-					?>
-
-
-
-
-
-					<div class="footer__social">
-						<a href="#">
-							<svg width="20" height="20">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#facebook"></use>
-							</svg>
-						</a>
-						<a href="#">
-							<svg width="20" height="20">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#insta"></use>
-							</svg>
-						</a>
-						<a href="#">
-							<svg width="20" height="20">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#twitter"></use>
-							</svg>
-						</a>
-						<a href="#">
-							<svg width="20" height="20">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#linkedin"></use>
-							</svg>
-						</a>
-						<a href="#">
-							<svg width="20" height="20">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#youtube"></use>
-							</svg>
-						</a>
-					</div>
+					$sm = false;
+					$social = get_field( 'social_links', 14 );
+					foreach ( $social as $namesocial => $linksocial) :
+						if ( $linksocial ) :
+							if ( !$sm ) :
+								echo '<div class="footer__social">';
+							endif;
+							?>
+							<a href="<?php the_field( 'social_links_' . $namesocial, 14 ); ?>" target="_blank">
+									<svg width="20" height="20">
+										<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#<?php echo $namesocial ?>"></use>
+									</svg>
+								</a>
+							<?php
+							
+							$sm = true;
+						endif;
+					endforeach;
+					if ( $sm ) :
+						echo '</div>';
+					endif;
+					?>				
 				</div>
 
 				<?php
 				$locations = get_nav_menu_locations();
-				if ( isset( $locations['footer-menu_1'] ) && $locations['footer-menu_1'] != 0 ) {
+				if ( isset( $locations['footer-menu_1'] ) && $locations['footer-menu_1'] != 0 ) :
 					$menu_object = wp_get_nav_menu_object( $locations['footer-menu_1'] );
 					?>
 						<div class="footer__menu menu-footer">
@@ -157,9 +139,9 @@
 							</nav>
 						</div>
 					<?php
-				}
+				endif;
 				
-				if ( isset( $locations['footer-menu_2'] ) && $locations['footer-menu_2'] != 0 ) {
+				if ( isset( $locations['footer-menu_2'] ) && $locations['footer-menu_2'] != 0 ) :
 					$menu_object = wp_get_nav_menu_object( $locations['footer-menu_2'] );
 					?>
 						<div class="footer__menu menu-footer">
@@ -181,19 +163,21 @@
 							</nav>
 						</div>
 					<?php
-				}
+				endif;
 				?>				
 					
 				<div class="footer__contacts">
-					<div class="menu-footer__title title title_s">Contact us</div>
+					<div class="menu-footer__title title title_s"><?php the_field( 'footer_contacts_title', 14 ); ?></div>
 					<p>
-						Do you have any queries or suggestions?
-						<a target="_blank" href="mailto:yourinfo@gmail.com">yourinfo@gmail.com</a>
+						<?php the_field( 'footer_contacts_info-1_descr-1', 14 ); ?>
+						<a target="_blank" href="mailto:<?php the_field( 'footer_contacts_info-1_contact-1', 14 ); ?>"><?php the_field( 'footer_contacts_info-1_contact-1', 14 ); ?></a>
 					</p>
-					<p>
-						If you need support? Just give us a call.
-						<a href="tel:+5511122233344">+55 111 222 333 44</a>
-					</p>
+					<?php if ( get_field( 'footer_contacts_info-2' ) ) : ?>
+						<p>
+							<?php the_field( 'footer_contacts_info-2_descr-2', 14 ); ?>
+							<a href="tel:<?php the_field( 'footer_contacts_info-2_contact-2', 14 ); ?>"><?php the_field( 'footer_contacts_info-2_contact-2', 14 ); ?></a>
+						</p>
+					<?php endif; ?>					
 				</div>
 			</div>
 		</div>
@@ -223,8 +207,8 @@
 					</div>
 				</div>
 				<div class="bottom-footer__copy">
-					© Copyright 2023 MiniStore. Design by
-					<a href="#">TemplatesJungle</a>
+					© <?php the_field( 'copyright', 14 ) ?> Design by
+					<a href="#">Taras Samoilov</a>
 				</div>
 			</div>
 		</div>
