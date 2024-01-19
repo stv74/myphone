@@ -62,6 +62,11 @@
 					</div>
 				</div>
 			</div>
+			<?php
+			echo '<pre>';
+			var_dump( get_field('insta_img-1') );
+			echo '</pre>';
+			?>
 		</section>
 	</main>
 	<footer class="footer">

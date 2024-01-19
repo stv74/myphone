@@ -46,7 +46,12 @@ function ministore_setup() {
 		*/
 	add_theme_support( 'post-thumbnails' );
 
-	// This theme uses wp_nav_menu() in one location.
+	// Set up a size of images
+	add_image_size( 'ministore_insta-small', 245, 245, true );
+	add_image_size( 'ministore_insta-medium', 350, 350, true );
+	add_image_size( 'ministore_insta-large', 475, 475, true );
+
+	// This theme uses wp_nav_menu() in three location.
 	register_nav_menus(
 		array(
 			'header-menu' => esc_html__( 'Main menu', 'ministore' ),
