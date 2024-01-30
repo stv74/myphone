@@ -22,17 +22,37 @@
 		<section class="home-page__insta insta">
 			<div class="insta__container">
 				<h2 class="insta__title title title_m">
-					Shop our insta
+					<?php the_field( 'insta_title', 14 ) ?>
 				</h2>
 				<div class="insta__items">
-					<div class="insta__item-ibg">
+
+					<?php
+					for ( $i = 1; $i <= 5; $i++ ):
+						$postlink = get_field( "post-{$i}_link-{$i}", 14 );
+						$postimage = get_field( "post-{$i}_image-{$i}", 14 );
+						if ( ! empty( $postimage ) && ! empty( $postlink ) ):
+						?>
+							<div class="insta__item-ibg">
+								<a href="<?php echo $postlink ?>">
+									<?php echo wp_get_attachment_image( $postimage['ID'] ); ?>									
+									<svg width="30" height="32" class="item-insta__icon">
+										<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#insta"></use>
+									</svg>
+								</a>
+							</div>
+						<?php
+						endif;
+					endfor;
+					?>
+
+					<!-- <div class="insta__item-ibg">
 						<a href="#"><picture><source srcset="<?php echo bloginfo('template_url'); ?>/assets/img/insta/image_1.webp" type="image/webp"><img src="<?php echo bloginfo('template_url'); ?>/assets/img/insta/image_1.jpg" alt="The post in Instagramm" /></picture>
 							<svg width="30" height="32" class="item-insta__icon">
 								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#insta"></use>
 							</svg>
 						</a>
-					</div>
-					<div class="insta__item-ibg item-insta">
+					</div> -->
+					<!-- <div class="insta__item-ibg item-insta">
 						<a href="#"><picture><source srcset="<?php echo bloginfo('template_url'); ?>/assets/img/insta/image_2.webp" type="image/webp"><img src="<?php echo bloginfo('template_url'); ?>/assets/img/insta/image_2.jpg" alt="The post in Instagramm" /></picture>
 							<svg width="30" height="32" class="item-insta__icon">
 								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#insta"></use>
@@ -59,14 +79,21 @@
 								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#insta"></use>
 							</svg>
 						</a>
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<?php
 			echo '<pre>';
-			var_dump( get_field('insta_img-1') );
+			// var_dump( get_field('post-1_image-1')['ID'] );
+			// echo wp_get_attachment_image_sizes( get_field("post-1_image-1")['ID'], 'ministore_insta-medium' );
+			// echo wp_get_attachment_image( get_field("post-1_image-1")['ID'], 'ministore_insta-medium' );
 			echo '</pre>';
 			?>
+			<img
+				src="<?php echo wp_get_attachment_image_url( get_field("post-1_image-1")['ID'], 'ministore_insta-large' ) ?>"
+				srcset="<?php echo wp_get_attachment_image_srcset( get_field("post-1_image-1")['ID'], 'ministore_insta-large' ) ?>"
+				sizes="<?php echo wp_get_attachment_image_sizes( get_field("post-1_image-1")['ID'], 'ministore_insta-large' ) ?>"
+			>
 		</section>
 	</main>
 	<footer class="footer">
