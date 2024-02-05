@@ -3,14 +3,13 @@
 				<div class="subscribe__body">
 					<div class="subscribe__content">
 						<h2 class="subscribe__title title title_m">
-							Subscribe Us now
+							<?php the_field( 'subscribe_title', 14 ) ?>
 						</h2>
 						<div class="subscribe__descr">
-							Get latest news, updates and deals directly
-							mailed to your inbox.
+							<?php the_field( 'subscribe_descr', 14 ) ?>
 						</div>
-					</div>
-					<form action="#" class="subscribe__form">
+					</div>					
+					<form class="subscribe__form">
 						<input autocomplete="off" type="text" name="home_subscribe" placeholder="Your email address here" class="input" />
 						<button type="submit" class="button button_subscribe">
 							Subscribe
@@ -34,7 +33,7 @@
 						?>
 							<div class="insta__item-ibg">
 								<a href="<?php echo $postlink ?>">
-									<?php echo wp_get_attachment_image( $postimage['ID'] ); ?>									
+									<?php echo wp_get_attachment_image( $postimage, 'ministore_insta' ); ?>									
 									<svg width="30" height="32" class="item-insta__icon">
 										<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#insta"></use>
 									</svg>
@@ -44,56 +43,9 @@
 						endif;
 					endfor;
 					?>
-
-					<!-- <div class="insta__item-ibg">
-						<a href="#"><picture><source srcset="<?php echo bloginfo('template_url'); ?>/assets/img/insta/image_1.webp" type="image/webp"><img src="<?php echo bloginfo('template_url'); ?>/assets/img/insta/image_1.jpg" alt="The post in Instagramm" /></picture>
-							<svg width="30" height="32" class="item-insta__icon">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#insta"></use>
-							</svg>
-						</a>
-					</div> -->
-					<!-- <div class="insta__item-ibg item-insta">
-						<a href="#"><picture><source srcset="<?php echo bloginfo('template_url'); ?>/assets/img/insta/image_2.webp" type="image/webp"><img src="<?php echo bloginfo('template_url'); ?>/assets/img/insta/image_2.jpg" alt="The post in Instagramm" /></picture>
-							<svg width="30" height="32" class="item-insta__icon">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#insta"></use>
-							</svg>
-						</a>
-					</div>
-					<div class="insta__item-ibg item-insta">
-						<a href="#"><picture><source srcset="<?php echo bloginfo('template_url'); ?>/assets/img/insta/image_3.webp" type="image/webp"><img src="<?php echo bloginfo('template_url'); ?>/assets/img/insta/image_3.jpg" alt="The post in Instagramm" /></picture>
-							<svg width="30" height="32" class="item-insta__icon">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#insta"></use>
-							</svg>
-						</a>
-					</div>
-					<div class="insta__item-ibg item-insta">
-						<a href="#"><picture><source srcset="<?php echo bloginfo('template_url'); ?>/assets/img/insta/image_4.webp" type="image/webp"><img src="<?php echo bloginfo('template_url'); ?>/assets/img/insta/image_4.jpg" alt="The post in Instagramm" /></picture>
-							<svg width="30" height="32" class="item-insta__icon">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#insta"></use>
-							</svg>
-						</a>
-					</div>
-					<div class="insta__item-ibg item-insta">
-						<a href="#"><picture><source srcset="<?php echo bloginfo('template_url'); ?>/assets/img/insta/image_5.webp" type="image/webp"><img src="<?php echo bloginfo('template_url'); ?>/assets/img/insta/image_5.jpg" alt="The post in Instagramm" /></picture>
-							<svg width="30" height="32" class="item-insta__icon">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#insta"></use>
-							</svg>
-						</a>
-					</div> -->
+					
 				</div>
-			</div>
-			<?php
-			echo '<pre>';
-			// var_dump( get_field('post-1_image-1')['ID'] );
-			// echo wp_get_attachment_image_sizes( get_field("post-1_image-1")['ID'], 'ministore_insta-medium' );
-			// echo wp_get_attachment_image( get_field("post-1_image-1")['ID'], 'ministore_insta-medium' );
-			echo '</pre>';
-			?>
-			<img
-				src="<?php echo wp_get_attachment_image_url( get_field("post-1_image-1")['ID'], 'ministore_insta-large' ) ?>"
-				srcset="<?php echo wp_get_attachment_image_srcset( get_field("post-1_image-1")['ID'], 'ministore_insta-large' ) ?>"
-				sizes="<?php echo wp_get_attachment_image_sizes( get_field("post-1_image-1")['ID'], 'ministore_insta-large' ) ?>"
-			>
+			</div>			
 		</section>
 	</main>
 	<footer class="footer">
