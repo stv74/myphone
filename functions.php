@@ -48,6 +48,7 @@ function ministore_setup() {
 
 	// Set up a size of images
 	add_image_size( 'ministore_insta', 475, 475, true );
+	add_image_size( 'ministore_slider', 657, 676, true );
 
 	// This theme uses wp_nav_menu() in three location.
 	register_nav_menus(
@@ -106,6 +107,30 @@ function ministore_setup() {
 	);
 }
 add_action( 'after_setup_theme', 'ministore_setup' );
+
+/**
+ * Register Custom Post Types
+ */
+function ministore_register_post_types() {
+	register_post_type( 'main-slider', [
+		'labels' => [
+			'name'               => esc_html__( 'Slider', 'ministore' ),
+			'singular_name'      => esc_html__( 'Slide', 'ministore' ),
+			'add_new'            => esc_html__( 'Add slide', 'ministore' ),
+			'add_new_item'       => esc_html__( 'Adding slide', 'ministore' ),
+			'edit_item'          => esc_html__( 'Edit slide', 'ministore' ),
+			'new_item'           => esc_html__( 'New slide', 'ministore' ),
+			'view_item'          => esc_html__( 'View slide', 'ministore' ),
+		],
+		'public'                 => true,
+		'menu_position'       => null,
+		'menu_icon'           => 'dashicons-slides',
+		'supports'            => [ 'title' ],		
+	] );
+
+}
+add_action( 'init', 'ministore_register_post_types' );
+
 
 /**
  * Create menus using the BEM methodology

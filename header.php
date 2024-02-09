@@ -91,32 +91,39 @@
 					<h1 class="visually-hidden"><?php bloginfo('name'); echo " - "; bloginfo('description'); ?></h1>
 					<div class="promo__slider swiper">
 						<div class="promo__wrapper swiper-wrapper">
-							<div class="promo__slide slide-promo swiper-slide">
-								<div class="slide-promo__container">
-									<div class="slide-promo__content">
-										<div class="slide-promo__title title">
-											Your Products are great.
+
+							<?php
+							$slides = get_posts( array(
+								'numberposts' => -1,
+								'post_type'   => 'main-slider',
+								'suppress_filters' => true,
+							) );
+
+							global $post;
+
+							foreach( $slides as $post ){
+								setup_postdata( $post );
+								?>
+									<div class="promo__slide slide-promo swiper-slide">
+										<div class="slide-promo__container">
+											<div class="slide-promo__content">
+												<div class="slide-promo__title title">
+													<?php the_title(); ?>
+												</div>
+												<a href="<?php the_field( 'slide_url' ) ?>" class="slide-promo__button button"><?php the_field( 'slide_btn' ) ?></a>
+											</div>
+											<div class="slide-promo__img">
+												<!-- <img src="<?php the_field('slide_img') ?>" alt=""> -->
+												<?php echo wp_get_attachment_image( get_field( 'slide_img' ), 'ministore_slider' ); ?>
+											</div>
 										</div>
-										<a href="#" class="slide-promo__button button">Shop Product</a>
-									</div>
-									<div class="slide-promo__img">
-										<picture><source srcset="<?php echo bloginfo('template_url'); ?>/assets/img/promo/image_1.webp" type="image/webp"><img src="<?php echo bloginfo('template_url'); ?>/assets/img/promo/image_1.png" alt="Watch" /></picture>
-									</div>
-								</div>
-							</div>
-							<div class="promo__slide slide-promo swiper-slide">
-								<div class="slide-promo__container">
-									<div class="slide-promo__content">
-										<div class="slide-promo__title title">
-											Your Products are great.
-										</div>
-										<a href="#" class="slide-promo__button button">Shop Product</a>
-									</div>
-									<div class="slide-promo__img">
-										<picture><source srcset="<?php echo bloginfo('template_url'); ?>/assets/img/promo/image_1.webp" type="image/webp"><img src="<?php echo bloginfo('template_url'); ?>/assets/img/promo/image_1.png" alt="Watch" /></picture>
-									</div>
-								</div>
-							</div>
+									</div>			
+								<?php
+							}
+
+							wp_reset_postdata(); 
+							?>
+							
 						</div>
 						<button type="button" class="swiper-button-prev"></button>
 						<button type="button" class="swiper-button-next"></button>
