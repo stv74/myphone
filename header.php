@@ -5,14 +5,13 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-
 	<div class="wrapper">
+
 		<header class="header">
 			<div class="header__container">
 				<div class="header__logo">
@@ -20,7 +19,6 @@
 				</div>
 				<div class="header__menu menu">
 					<nav class="menu__body">
-
 						<?php
 						wp_nav_menu( [
 							'theme_location'  => 'header-menu',
@@ -30,8 +28,7 @@
 							'depth'           => 2,
 							'walker'          => new Ministore_Walker_Nav_Menu(),
 						] );
-						?>
-												
+						?>												
 					</nav>
 				</div>
 				<div data-da=".menu__body,479,98" class="header__buttons">
@@ -84,24 +81,19 @@
 
 		<main class="page">
 
-		<?php
-		if ( is_front_page() ) {
-			?>
+			<?php if ( is_front_page() ) : ?>
 				<section class="page__promo promo">
 					<h1 class="visually-hidden"><?php bloginfo('name'); echo " - "; bloginfo('description'); ?></h1>
 					<div class="promo__slider swiper">
 						<div class="promo__wrapper swiper-wrapper">
-
 							<?php
 							$slides = get_posts( array(
 								'numberposts' => -1,
 								'post_type'   => 'main-slider',
 								'suppress_filters' => true,
 							) );
-
 							global $post;
-
-							foreach( $slides as $post ){
+							foreach ( $slides as $post ) : 
 								setup_postdata( $post );
 								?>
 									<div class="promo__slide slide-promo swiper-slide">
@@ -113,26 +105,20 @@
 												<a href="<?php the_field( 'slide_url' ) ?>" class="slide-promo__button button"><?php the_field( 'slide_btn' ) ?></a>
 											</div>
 											<div class="slide-promo__img">
-												<!-- <img src="<?php the_field('slide_img') ?>" alt=""> -->
 												<?php echo wp_get_attachment_image( get_field( 'slide_img' ), 'ministore_slider' ); ?>
 											</div>
 										</div>
 									</div>			
 								<?php
-							}
-
+							endforeach;
 							wp_reset_postdata(); 
-							?>
-							
+							?>							
 						</div>
 						<button type="button" class="swiper-button-prev"></button>
 						<button type="button" class="swiper-button-next"></button>
 					</div>
 				</section>
-
-			<?php
-		} elseif ( is_home() || is_page() ) {
-			?>
+			<?php elseif ( is_home() || is_page() ) : ?>
 				<section class="page__head head-page">
 					<div class="head-page__container">
 						<h1 class="head-page__title title">
@@ -149,7 +135,5 @@
 						</div>
 					</div>
 				</section>				
-			<?php
-		}
-		?>
+			<?php endif; ?>
 

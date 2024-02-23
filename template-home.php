@@ -8,70 +8,28 @@ get_header();
 
 	<div class="home-page__advantages advantages">
 		<div class="advantages__container">
-			<div class="advantages__item item-advantage">
-				<div class="item-advantage__icon">
-					<svg width="25" height="25">
-						<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#delivery"></use>
-					</svg>
-				</div>
-				<div class="item-advantage__body">
-					<div class="item-advantage__title title title_s">
-						Free delivery
+			<?php
+			for ( $i = 1; $i <= 4; $i++ ) :
+				$advantage = get_field( "advantage-{$i}", 14 );
+				if ( $advantage['title'] && $advantage['descr'] && $advantage['icon'] ) :
+				?>
+					<div class="advantages__item item-advantage">
+						<div class="item-advantage__icon">
+							<img src="<?php echo $advantage['icon'] ?>">
+						</div>
+						<div class="item-advantage__body">
+							<div class="item-advantage__title title title_s">
+								<?php echo $advantage['title']; ?>
+						</div>
+							<div class="item-advantage__text">
+							<?php echo $advantage['descr']; ?>
+							</div>
+						</div>
 					</div>
-					<div class="item-advantage__text">
-						Consectetur adipi elit lorem ipsum dolor sit
-						amet.
-					</div>
-				</div>
-			</div>
-			<div class="advantages__item item-advantage">
-				<div class="item-advantage__icon">
-					<svg width="25" height="25">
-						<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#guarantee"></use>
-					</svg>
-				</div>
-				<div class="item-advantage__body">
-					<div class="item-advantage__title title title_s">
-						Quality guarantee
-					</div>
-					<div class="item-advantage__text">
-						Dolor sit amet orem ipsu mcons ectetur adipi
-						elit.
-					</div>
-				</div>
-			</div>
-			<div class="advantages__item item-advantage">
-				<div class="item-advantage__icon">
-					<svg width="25" height="25">
-						<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#offers"></use>
-					</svg>
-				</div>
-				<div class="item-advantage__body">
-					<div class="item-advantage__title title title_s">
-						Daily offers
-					</div>
-					<div class="item-advantage__text">
-						Amet consectetur adipi elit loreme ipsum
-						dolor sit.
-					</div>
-				</div>
-			</div>
-			<div class="advantages__item item-advantage">
-				<div class="item-advantage__icon">
-					<svg width="25" height="25">
-						<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#secure"></use>
-					</svg>
-				</div>
-				<div class="item-advantage__body">
-					<div class="item-advantage__title title title_s">
-						100% secure payment
-					</div>
-					<div class="item-advantage__text">
-						Rem Lopsum dolor sit amet, consectetur adipi
-						elit.
-					</div>
-				</div>
-			</div>
+				<?php
+				endif;
+			endfor;
+			?>						
 		</div>
 	</div>
 	<section class="home-page__products products">
@@ -335,11 +293,11 @@ get_header();
 	<section class="home-page__discount discount">
 		<div class="discount__container">
 			<div class="discount__content">
-				<div class="discount__subtitle">10% off</div>
+				<div class="discount__subtitle"><?php the_field( 'discount_size' ); ?></div>
 				<h2 class="discount__title title">
-					New year sale
+					<?php the_field( 'discount_name' ); ?>
 				</h2>
-				<a href="#" class="discount__button button">Shop sale</a>
+				<a href="<?php the_field( 'discount_link' ); ?>" class="discount__button button"><?php the_field( 'discount_button' ); ?></a>
 			</div>
 			<div class="discount__img">
 				<div class="discount__wrapp-ibg">
@@ -399,82 +357,56 @@ get_header();
 			</div>
 		</div>
 	</section>
+	<?php
+	$slides = get_posts( array(
+		'numberposts' => -1,
+		'post_type'   => 'review-slider',
+		'suppress_filters' => true,
+	) );
+	if ( $slides ) :
+	?>
 	<div class="home-page__reviews reviews">
 		<div class="reviews__container">
 			<div class="reviews__slider swiper">
 				<div class="reviews__wrapper swiper-wrapper">
-					<div class="reviews__slide slide-review swiper-slide">
-						<div class="slide-review__icon">
-							<svg width="91" height="65">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#quotes"></use>
-							</svg>
-						</div>
-						<div class="slide-review__text">
-							“Tempus oncu enim pellen tesque este
-							pretium in neque, elit morbi sagittis
-							lorem habi mattis Pellen tesque pretium
-							feugiat vel morbi suspen dise sagittis
-							lorem habi tasse morbi.”
-						</div>
-						<div class="slide-review__rating">
-							<svg width="17" height="17">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#star"></use>
-							</svg>
-							<svg width="17" height="17">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#star"></use>
-							</svg>
-							<svg width="17" height="17">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#star"></use>
-							</svg>
-							<svg width="17" height="17">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#star"></use>
-							</svg>
-							<svg width="17" height="17">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#star"></use>
-							</svg>
-						</div>
-						<div class="slide-review__name">
-							Emma Chamberlin
-						</div>
-					</div>
-					<div class="reviews__slide slide-review swiper-slide">
-						<div class="slide-review__icon">
-							<svg width="91" height="65">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#quotes"></use>
-							</svg>
-						</div>
-						<div class="slide-review__text">
-							“Tempus oncu enim pellen tesque este
-							pretium in neque, elit morbi sagittis
-							lorem habi mattis Pellen tesque pretium
-							feugiat vel morbi suspen dise sagittis
-							lorem habi tasse morbi. Tempus oncu enim
-							pellen tesque pretium in neque”
-						</div>
-						<div class="slide-review__rating">
-							<svg width="17" height="17">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#star"></use>
-							</svg>
-							<svg width="17" height="17">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#star"></use>
-							</svg>
-							<svg width="17" height="17">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#star"></use>
-							</svg>
-							<svg width="17" height="17">
-								<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#star"></use>
-							</svg>
-						</div>
-						<div class="slide-review__name">
-							Ken Watson
-						</div>
-					</div>
+					<?php
+					foreach ( $slides as $post ) : 
+						setup_postdata( $post );
+						?>
+							<div class="reviews__slide slide-review swiper-slide">
+								<div class="slide-review__icon">
+									<svg width="91" height="65">
+										<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#quotes"></use>
+									</svg>
+								</div>
+								<div class="slide-review__text">
+									<?php echo '“' . get_field( 'review_text' ) . '”' ?>
+								</div>
+								<?php 
+								$stars = get_field( 'review_rating' );
+								if ( $stars > 0 ) :
+								?>
+								<div class="slide-review__rating">
+									<?php for ( $i = 0; $i < $stars; $i++ ) : ?>
+										<svg width="17" height="17">
+											<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#star"></use>
+										</svg>
+									<?php endfor; ?>
+								</div>
+								<?php endif; ?>
+								<div class="slide-review__name">
+									<?php the_field( 'review_author' ) ?>
+								</div>
+							</div>									
+						<?php
+					endforeach;
+					wp_reset_postdata(); 
+					?>					
 				</div>
 				<button type="button" class="swiper-button-prev"></button>
 				<button type="button" class="swiper-button-next"></button>
 			</div>
 		</div>
 	</div>			
-
-<?php 
+	<?php endif;
 get_footer();

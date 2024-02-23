@@ -127,7 +127,21 @@ function ministore_register_post_types() {
 		'menu_icon'           => 'dashicons-slides',
 		'supports'            => [ 'title' ],		
 	] );
-
+	register_post_type( 'review-slider', [
+		'labels' => [
+			'name'               => esc_html__( 'Reviews', 'ministore' ),
+			'singular_name'      => esc_html__( 'Review', 'ministore' ),
+			'add_new'            => esc_html__( 'Add review', 'ministore' ),
+			'add_new_item'       => esc_html__( 'Adding review', 'ministore' ),
+			'edit_item'          => esc_html__( 'Edit review', 'ministore' ),
+			'new_item'           => esc_html__( 'New review', 'ministore' ),
+			'view_item'          => esc_html__( 'View review', 'ministore' ),
+		],
+		'public'                 => true,
+		'menu_position'       => null,
+		'menu_icon'           => 'dashicons-testimonial',
+		'supports'            => [ 'title' ],		
+	] );
 }
 add_action( 'init', 'ministore_register_post_types' );
 

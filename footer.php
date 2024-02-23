@@ -26,10 +26,10 @@
 				<div class="insta__items">
 
 					<?php
-					for ( $i = 1; $i <= 5; $i++ ):
+					for ( $i = 1; $i <= 5; $i++ ) :
 						$postlink = get_field( "post-{$i}_link-{$i}", 14 );
 						$postimage = get_field( "post-{$i}_image-{$i}", 14 );
-						if ( ! empty( $postimage ) && ! empty( $postlink ) ):
+						if ( ! empty( $postimage ) && ! empty( $postlink ) ) :
 						?>
 							<div class="insta__item-ibg">
 								<a href="<?php echo $postlink ?>">
@@ -57,12 +57,12 @@
 						$logo_img = '';
 						$custom_logo_id = get_theme_mod( 'custom_logo' );
 						
-						if ( $custom_logo_id ) {
+						if ( $custom_logo_id ) :
 							$logo_img = wp_get_attachment_image( $custom_logo_id, 'full', false, array(
 								'class'    => 'custom-logo',
 								'itemprop' => 'logo',
 							) );
-						}
+						endif;
 						
 						echo $logo_img;
 						?>
