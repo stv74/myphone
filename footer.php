@@ -3,10 +3,10 @@
 				<div class="subscribe__body">
 					<div class="subscribe__content">
 						<h2 class="subscribe__title title title_m">
-							<?php the_field( 'subscribe_title', 14 ) ?>
+							<?php esc_html(the_field( 'subscribe_title', 14 )) ?>
 						</h2>
 						<div class="subscribe__descr">
-							<?php the_field( 'subscribe_descr', 14 ) ?>
+							<?php esc_html(the_field( 'subscribe_descr', 14 )) ?>
 						</div>
 					</div>					
 					<form class="subscribe__form">
@@ -21,7 +21,7 @@
 		<section class="home-page__insta insta">
 			<div class="insta__container">
 				<h2 class="insta__title title title_m">
-					<?php the_field( 'insta_title', 14 ) ?>
+					<?php esc_html(the_field( 'insta_title', 14 )) ?>
 				</h2>
 				<div class="insta__items">
 
@@ -32,10 +32,10 @@
 						if ( ! empty( $postimage ) && ! empty( $postlink ) ) :
 						?>
 							<div class="insta__item-ibg">
-								<a href="<?php echo $postlink ?>">
+								<a href="<?php echo esc_url($postlink) ?>">
 									<?php echo wp_get_attachment_image( $postimage, 'ministore_insta' ); ?>									
 									<svg width="30" height="32" class="item-insta__icon">
-										<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#insta"></use>
+										<use xlink:href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/icons/icons.svg#insta"></use>
 									</svg>
 								</a>
 							</div>
@@ -70,7 +70,7 @@
 
 					<?php if ( get_field( 'footer_descr', 14 ) ) : ?>
 						<div class="footer__text">
-							<?php the_field( 'footer_descr', 14 ); ?>
+							<?php esc_html(the_field( 'footer_descr', 14 )); ?>
 						</div>
 					<?php
 					endif;
@@ -83,9 +83,9 @@
 								echo '<div class="footer__social">';
 							endif;
 							?>
-							<a href="<?php the_field( 'social_links_' . $namesocial, 14 ); ?>" target="_blank">
-									<svg width="20" height="20">
-										<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#<?php echo $namesocial ?>"></use>
+							<a href="<?php esc_attr(the_field( 'social_links_' . $namesocial, 14 )); ?>" target="_blank">
+									<svg width="20" height="20">										
+										<use xlink:href="<?php echo esc_url(get_template_directory_uri() . '/assets/img/icons/icons.svg#' . $namesocial) ?>"></use>
 									</svg>
 								</a>
 							<?php
@@ -151,15 +151,15 @@
 				?>				
 					
 				<div class="footer__contacts">
-					<div class="menu-footer__title title title_s"><?php the_field( 'footer_contacts_title', 14 ); ?></div>
+					<div class="menu-footer__title title title_s"><?php esc_html(the_field( 'footer_contacts_title', 14 )); ?></div>
 					<p>
-						<?php the_field( 'footer_contacts_info-1_descr-1', 14 ); ?>
-						<a target="_blank" href="mailto:<?php the_field( 'footer_contacts_info-1_contact-1', 14 ); ?>"><?php the_field( 'footer_contacts_info-1_contact-1', 14 ); ?></a>
+						<?php esc_html(the_field( 'footer_contacts_info-1_descr-1', 14 )); ?>
+						<a target="_blank" href="mailto:<?php esc_attr(the_field( 'footer_contacts_info-1_contact-1', 14 )); ?>"><?php esc_html(the_field( 'footer_contacts_info-1_contact-1', 14 )); ?></a>
 					</p>
 					<?php if ( get_field( 'footer_contacts_info-2' ) ) : ?>
 						<p>
-							<?php the_field( 'footer_contacts_info-2_descr-2', 14 ); ?>
-							<a href="tel:<?php the_field( 'footer_contacts_info-2_contact-2', 14 ); ?>"><?php the_field( 'footer_contacts_info-2_contact-2', 14 ); ?></a>
+							<?php esc_html(the_field( 'footer_contacts_info-2_descr-2', 14 )); ?>
+							<a href="tel:<?php esc_attr(the_field( 'footer_contacts_info-2_contact-2', 14 )); ?>"><?php esc_html(the_field( 'footer_contacts_info-2_contact-2', 14 )); ?></a>
 						</p>
 					<?php endif; ?>					
 				</div>
@@ -171,27 +171,27 @@
 					<div class="bottom-footer__ship">
 						<div class="bottom-footer__ship-text">We ship with:</div>
 						<svg width="60" height="24">
-							<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#partner1"></use>
+							<use xlink:href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/icons/icons.svg#partner1"></use>
 						</svg>
 						<svg width="60" height="24">
-							<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#partner2"></use>
+							<use xlink:href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/icons/icons.svg#partner2"></use>
 						</svg>
 					</div>
 					<div class="bottom-footer__pay">
 						<div class="bottom-footer__pay-text">Payment options:</div>
 						<svg width="30" height="24">
-							<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#visa"></use>
+							<use xlink:href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/icons/icons.svg#visa"></use>
 						</svg>
 						<svg width="30" height="24">
-							<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#mastercard"></use>
+							<use xlink:href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/icons/icons.svg#mastercard"></use>
 						</svg>
 						<svg width="30" height="24">
-							<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#paypal"></use>
+							<use xlink:href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/icons/icons.svg#paypal"></use>
 						</svg>
 					</div>
 				</div>
 				<div class="bottom-footer__copy">
-					© <?php the_field( 'copyright', 14 ) ?> Design by
+					© <?php esc_html(the_field( 'copyright', 14 )) ?> Design by
 					<a href="#">Taras Samoilov</a>
 				</div>
 			</div>

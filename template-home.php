@@ -15,14 +15,14 @@ get_header();
 				?>
 					<div class="advantages__item item-advantage">
 						<div class="item-advantage__icon">
-							<img src="<?php echo $advantage['icon'] ?>">
+							<img src="<?php echo esc_url($advantage['icon']) ?>">
 						</div>
 						<div class="item-advantage__body">
 							<div class="item-advantage__title title title_s">
-								<?php echo $advantage['title']; ?>
+								<?php echo esc_html($advantage['title']); ?>
 						</div>
 							<div class="item-advantage__text">
-							<?php echo $advantage['descr']; ?>
+							<?php echo esc_html($advantage['descr']); ?>
 							</div>
 						</div>
 					</div>
@@ -293,15 +293,15 @@ get_header();
 	<section class="home-page__discount discount">
 		<div class="discount__container">
 			<div class="discount__content">
-				<div class="discount__subtitle"><?php the_field( 'discount_size' ); ?></div>
+				<div class="discount__subtitle"><?php esc_html(the_field( 'discount_size' )); ?></div>
 				<h2 class="discount__title title">
-					<?php the_field( 'discount_name' ); ?>
+					<?php esc_html(the_field( 'discount_name' )); ?>
 				</h2>
-				<a href="<?php the_field( 'discount_link' ); ?>" class="discount__button button"><?php the_field( 'discount_button' ); ?></a>
+				<a href="<?php esc_attr(the_field( 'discount_link' )); ?>" class="discount__button button"><?php esc_html(the_field( 'discount_button' )); ?></a>
 			</div>
 			<div class="discount__img">
 				<div class="discount__wrapp-ibg">
-					<picture><source srcset="<?php echo bloginfo('template_url'); ?>/assets/img/discount/image_1.webp" type="image/webp"><img src="<?php echo bloginfo('template_url'); ?>/assets/img/discount/image_1.png" alt="Discount" /></picture>
+					<picture><source srcset="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/discount/image_1.webp" type="image/webp"><img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/discount/image_1.png" alt="Discount" /></picture>
 				</div>
 			</div>
 		</div>
@@ -312,51 +312,47 @@ get_header();
 				<h2 class="head-section__title title title_m">
 					Latest Posts
 				</h2>
-				<a href="#" class="head-section__link">Read blog</a>
+				<a href="<?php echo esc_url( home_url( 'blog' ) ); ?>" class="head-section__link">Read blog</a>
 			</div>
 			<div class="posts__items">
-				<div class="posts__item post-item">
-					<div class="post-item__img">
-						<a href="#">
-							<picture><source srcset="<?php echo bloginfo('template_url'); ?>/assets/img/posts/image_1.webp" type="image/webp"><img src="<?php echo bloginfo('template_url'); ?>/assets/img/posts/image_1.jpg" alt="Post 1" /></picture>
-						</a>
+				<?php 
+				$my_posts = get_posts( array(
+					'numberposts' => 3,
+					'post_type'   => 'post',
+					'suppress_filters' => true,
+				) );
+
+				foreach( $my_posts as $post ) {
+					setup_postdata( $post );
+					?>
+					<div class="posts__item post-item">
+						<?php if ( has_post_thumbnail() ) : ?>
+							<div class="post-item__img">
+								<a href="<?php the_permalink(); ?>">
+									<img src="<?php the_post_thumbnail_url( 'ministore_blogpost-prev' ); ?>" alt="<?php echo esc_attr( get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) ) ?>">									
+								</a>
+							</div>
+						<?php else : ?>
+							<div class="post-item__img">
+								<img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/noimage.jpg" alt="Not Image">							
+							</div>
+						<?php endif; ?>
+						<div class="post-item__info">
+							<?php 
+							the_date( 'F j, Y', '', ' - ' );
+							the_category( ', ' );
+							?>
+						</div>
+						<a href="<?php the_permalink(); ?>" class="post-item__title title title_s"><?php the_title(); ?></a>
 					</div>
-					<div class="post-item__info">
-						feb 22, 2023 - Gadgets
-					</div>
-					<a href="#" class="post-item__title title title_s">
-						Get some cool gadgets in 2023
-					</a>
-				</div>
-				<div class="posts__item post-item">
-					<div class="post-item__img">
-						<a href="#">
-							<picture><source srcset="<?php echo bloginfo('template_url'); ?>/assets/img/posts/image_2.webp" type="image/webp"><img src="<?php echo bloginfo('template_url'); ?>/assets/img/posts/image_2.jpg" alt="Post 2" /></picture>
-						</a>
-					</div>
-					<div class="post-item__info">
-						feb 22, 2023 - technology
-					</div>
-					<a href="#" class="post-item__title title title_s">
-						Technology hack you won’t get
-					</a>
-				</div>
-				<div class="posts__item post-item">
-					<div class="post-item__img">
-						<a href="#">
-							<picture><source srcset="<?php echo bloginfo('template_url'); ?>/assets/img/posts/image_3.webp" type="image/webp"><img src="<?php echo bloginfo('template_url'); ?>/assets/img/posts/image_3.jpg" alt="Post 3" /></picture>
-						</a>
-					</div>
-					<div class="post-item__info">
-						feb 22, 2023 - camera
-					</div>
-					<a href="#" class="post-item__title title title_s">
-						Top 10 small camera in the world
-					</a>
-				</div>
+					<?php
+				}
+				wp_reset_postdata(); 
+				?>				
 			</div>
 		</div>
 	</section>
+	<!-- Section Reviews -->
 	<?php
 	$slides = get_posts( array(
 		'numberposts' => -1,
@@ -376,11 +372,11 @@ get_header();
 							<div class="reviews__slide slide-review swiper-slide">
 								<div class="slide-review__icon">
 									<svg width="91" height="65">
-										<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#quotes"></use>
+										<use xlink:href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/icons/icons.svg#quotes"></use>
 									</svg>
 								</div>
 								<div class="slide-review__text">
-									<?php echo '“' . get_field( 'review_text' ) . '”' ?>
+									<?php echo '“' . esc_html(get_field( 'review_text' )) . '”' ?>
 								</div>
 								<?php 
 								$stars = get_field( 'review_rating' );
@@ -389,13 +385,13 @@ get_header();
 								<div class="slide-review__rating">
 									<?php for ( $i = 0; $i < $stars; $i++ ) : ?>
 										<svg width="17" height="17">
-											<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#star"></use>
+											<use xlink:href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/icons/icons.svg#star"></use>
 										</svg>
 									<?php endfor; ?>
 								</div>
 								<?php endif; ?>
 								<div class="slide-review__name">
-									<?php the_field( 'review_author' ) ?>
+									<?php esc_html(the_field( 'review_author' )) ?>
 								</div>
 							</div>									
 						<?php

@@ -49,6 +49,8 @@ function ministore_setup() {
 	// Set up a size of images
 	add_image_size( 'ministore_insta', 475, 475, true );
 	add_image_size( 'ministore_slider', 657, 676, true );
+	add_image_size( 'ministore_blogpost-prev', 450, 320, true );
+	add_image_size( 'ministore_blogpost-full', 1300, 670, true );
 
 	// This theme uses wp_nav_menu() in three location.
 	register_nav_menus(

@@ -34,17 +34,17 @@
 				<div data-da=".menu__body,479,98" class="header__buttons">
 					<button class="header__button button-search">
 						<svg width="18" height="18">
-							<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#search"></use>
+							<use xlink:href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/icons/icons.svg#search"></use>
 						</svg>
 					</button>
 					<a href="#" class="header__button">
 						<svg width="18" height="18">
-							<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#person"></use>
+							<use xlink:href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/icons/icons.svg#person"></use>
 						</svg>
 					</a>
 					<a href="cart.html" class="header__button">
 						<svg width="18" height="18">
-							<use xlink:href="<?php echo bloginfo('template_url'); ?>/assets/img/icons/icons.svg#cart"></use>
+							<use xlink:href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/icons/icons.svg#cart"></use>
 						</svg>
 						<span>(0)</span>
 					</a>
@@ -102,7 +102,7 @@
 												<div class="slide-promo__title title">
 													<?php the_title(); ?>
 												</div>
-												<a href="<?php the_field( 'slide_url' ) ?>" class="slide-promo__button button"><?php the_field( 'slide_btn' ) ?></a>
+												<a href="<?php esc_attr(the_field( 'slide_url' )) ?>" class="slide-promo__button button"><?php esc_html(the_field( 'slide_btn' )) ?></a>
 											</div>
 											<div class="slide-promo__img">
 												<?php echo wp_get_attachment_image( get_field( 'slide_img' ), 'ministore_slider' ); ?>
