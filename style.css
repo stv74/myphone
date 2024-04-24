@@ -761,23 +761,21 @@ textarea {
   gap: 1.875rem;
 }
 
-.pagination__button {
+.pagination .prev,
+.pagination .next {
   width: 1.375rem;
   height: 2.8125rem;
 }
 
-.pagination__button svg {
+.pagination .prev svg,
+.pagination .next svg {
   width: 100%;
   height: 100%;
   fill: none;
   stroke: var(--secondary);
 }
 
-.pagination__button.disabled svg {
-  stroke: var(--text-icons);
-}
-
-.pagination__link {
+.pagination .page-numbers {
   color: var(--text-icons);
   font-family: Jost;
   font-size: 1.25rem;
@@ -788,9 +786,40 @@ textarea {
   transition: color 0.3s;
 }
 
-.pagination__link.active {
+.pagination .page-numbers.current {
   color: var(--secondary);
 }
+
+/* .pagination__button {
+  width: 1.375rem;
+  height: 2.8125rem;
+} */
+
+/* .pagination__button svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--secondary);
+} */
+
+/* .pagination__button.disabled svg {
+  stroke: var(--text-icons);
+} */
+
+/* .pagination__link {
+  color: var(--text-icons);
+  font-family: Jost;
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+} */
+
+/* .pagination__link.active {
+  color: var(--secondary);
+} */
 
 .search-form {
   display: -webkit-box;
@@ -1850,6 +1879,21 @@ textarea {
           align-items: center;
   gap: 1.25rem;
   margin-bottom: 1.25rem;
+}
+
+/* Sidebar */
+
+.widget_block:not(:last-child) {
+  margin-bottom: 2.5em;
+}
+
+.widget_block li:not(:last-child) {
+  margin-bottom: 0.5em;
+}
+
+.widget_block li a {
+  -webkit-transition: color 0.3s ease 0s;
+  transition: color 0.3s ease 0s;
 }
 
 .sidebar__links:not(:last-child) {
@@ -4974,9 +5018,13 @@ button.swiper-pagination-bullet {
     color: var(--secondary);
   }
 
-  .pagination__link:hover {
+  .pagination .page-numbers:hover {
     color: var(--secondary);
   }
+
+  /* .pagination__link:hover {
+    color: var(--secondary);
+  } */
 
   .menu__item:hover .submenu {
     display: block;
@@ -5016,10 +5064,15 @@ button.swiper-pagination-bullet {
         -ms-transform: translate(-50%, -120%);
             transform: translate(-50%, -120%);
   }
-
-  .block-links__link:hover {
+  
+  /* block__links:hover */
+  .widget_block li a:hover {
     color: var(--secondary);
   }
+
+  /* .block-links__link:hover {
+    color: var(--secondary);
+  } */
 
   .post__categories a:hover {
     color: var(--secondary);

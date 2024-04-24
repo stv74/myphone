@@ -233,13 +233,13 @@ add_action( 'after_setup_theme', 'ministore_content_width', 0 );
 function ministore_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar', 'ministore' ),
-			'id'            => 'sidebar-1',
+			'name'          => esc_html__( 'Blog sidebar', 'ministore' ),
+			'id'            => 'blogsidebar',
 			'description'   => esc_html__( 'Add widgets here.', 'ministore' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
+			'before_title'  => '<div class="block-links__title title title_s">',
+			'after_title'   => '</div>',
 		)
 	);
 }
