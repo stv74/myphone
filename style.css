@@ -1790,6 +1790,7 @@ textarea {
 
 .aboutus__img img {
   width: 100%;
+  height: auto;
 }
 
 .aboutus__content {
