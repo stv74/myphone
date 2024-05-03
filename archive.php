@@ -1,51 +1,61 @@
-<?php
-/**
- * The template for displaying archive pages
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package Ministore
- */
+<?php get_header(); ?>
 
-get_header();
-?>
-
-	<main id="primary" class="site-main">
-
-		<?php if ( have_posts() ) : ?>
-
-			<header class="page-header">
+<section class="blog-page__catalog catalog">
+	<div class="catalog__container catalog__container_l">
+		<h2 class="visually-hidden">Articles</h2>
+		<aside class="catalog__sidebar sidebar">
+			<form action="#" class="sidebar__search search-form">
+				<input autocomplete="off" type="text" name="blog_search" placeholder="Search" class="input" />
+				<button type="submit" class="search-form__button">
+					<svg width="21" height="21">
+						<use xlink:href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/icons/icons.svg#search"></use>
+					</svg>
+				</button>
+			</form>
+			<?php dynamic_sidebar( 'blogsidebar' ); ?>			
+		</aside>
+		<div class="catalog__body">
+			<?php if ( have_posts() ) : ?>
+				<div class="catalog__list">					
+					<?php while ( have_posts() ) : the_post(); ?>
+						<div class="catalog__item post-item">
+							<?php if ( has_post_thumbnail() ) : ?>
+								<div class="post-item__img">
+									<a href="<?php the_permalink(); ?>">
+										<img src="<?php the_post_thumbnail_url( 'ministore_blogpost-prev' ); ?>" alt="<?php echo esc_attr( get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) ) ?>">									
+									</a>
+								</div>
+							<?php else : ?>
+								<div class="post-item__img">
+									<img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/noimage.jpg" alt="Not Image">							
+								</div>
+							<?php endif; ?>
+							<div class="post-item__info">
+								<?php 
+								the_date( 'F j, Y', '', ' - ' );
+								the_category( ', ' );
+								?>
+							</div>
+							<a href="<?php the_permalink(); ?>" class="post-item__title title title_s"><?php the_title(); ?></a>
+						</div>
+					<?php endwhile; ?>
+				</div>
+			<?php endif; ?>				
+			
+			<div class="catalog__pagination pagination">
 				<?php
-				the_archive_title( '<h1 class="page-title">', '</h1>' );
-				the_archive_description( '<div class="archive-description">', '</div>' );
-				?>
-			</header><!-- .page-header -->
-
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
-
-				/*
-				 * Include the Post-Type-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_type() );
-
-			endwhile;
-
-			the_posts_navigation();
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		?>
-
-	</main><!-- #main -->
+				$url_img = esc_url( get_template_directory_uri() );
+				$args = [
+					'prev_text' => '<svg width="22" height="45"><use xlink:href="' . $url_img . '/assets/img/icons/icons.svg#arrow-sl"></use></svg>',
+					'next_text' => '<svg width="22" height="45"><use xlink:href="' . $url_img . '/assets/img/icons/icons.svg#arrow-sr"></use></svg>',
+				];
+				echo paginate_links( $args ); 
+				?>	
+							
+			</div>
+		</div>
+	</div>
+</section>
 
 <?php
-get_sidebar();
 get_footer();

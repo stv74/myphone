@@ -117,17 +117,33 @@
 						<button type="button" class="swiper-button-prev"></button>
 						<button type="button" class="swiper-button-next"></button>
 					</div>
-				</section>
-			<?php elseif ( is_home() || is_page() ) : ?>
+				</section>			
+			<?php else : ?>
 				<section class="page__head head-page">
 					<div class="head-page__container">
 						<h1 class="head-page__title title">
 							<?php
-							if ( is_home() ) {
+							if ( is_home() ) :
 								echo get_the_title( get_option('page_for_posts', true) );
-							} else {
+							elseif ( is_category() ) :
+								single_term_title('Category: ');
+							elseif ( is_tag() ) :
+								single_term_title('Tag Archive: ');
+							elseif ( is_author() ) :
+								echo "Author: ".get_the_author();
+							elseif ( is_archive() ) : 
+								if (is_day()) :
+									echo 'Day Archive: ' . get_the_date('d M');
+								elseif (is_month()) :
+									echo 'Month Archive: ' . get_the_date('M');
+								elseif (is_year()) :
+									echo 'Year Archive: ' . get_the_date('Y');
+								else :
+									echo "Archive";
+								endif;							
+							else :
 								the_title();
-							}
+							endif;
 							?>
 						</h1>
 						<div class="head-page__breadcrumbs breadcrumbs">
