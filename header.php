@@ -117,8 +117,8 @@
 						<button type="button" class="swiper-button-prev"></button>
 						<button type="button" class="swiper-button-next"></button>
 					</div>
-				</section>			
-			<?php else : ?>
+				</section>	
+			<?php elseif ( ! is_single() ) : ?>
 				<section class="page__head head-page">
 					<div class="head-page__container">
 						<h1 class="head-page__title title">

@@ -251,7 +251,10 @@ add_action( 'widgets_init', 'ministore_widgets_init' );
 function ministore_scripts() {
 	wp_enqueue_style( 'ministore-style', get_stylesheet_uri(), array(), _S_VERSION );	
 	wp_enqueue_script( 'ministore-script', get_template_directory_uri() . '/assets/js/app.js', array(), null, true );
-	
+
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}	
 }
 add_action( 'wp_enqueue_scripts', 'ministore_scripts' );
 
@@ -292,3 +295,28 @@ require get_template_directory() . '/inc/breadcrumbs.php';
 // 	require get_template_directory() . '/inc/jetpack.php';
 // }
 
+// Share on social networks
+function ministore_get_share($type = 'fb', $permalink = false, $title = false) {
+	if (!$permalink) {
+		$permalink = get_permalink();
+	}
+	if (!$title) {
+		$title = get_the_title();
+	}
+	switch ($type) {
+		case 'twi':
+			return 'http://twitter.com/home?status=' . $title . '+-+' . $permalink;
+			break;
+		case 'fb':
+			return 'http://www.facebook.com/sharer.php?u=' . $permalink . '&t=' . $title;
+			break;
+		case 'goglp':
+			return 'https://plus.google.com/share?url='. urlencode($permalink);
+			break;
+		case 'pin':
+			return 'http://pinterest.com/pin/create/button/?url=' . $permalink;
+			break;
+		default:
+			return '';
+	}
+}
