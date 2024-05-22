@@ -336,19 +336,13 @@ function ministore_comment( $comment, $args, $depth ) {
 	<<?php echo $tag; ?> class="<?php echo $classes ?>" id="comment-<?php comment_ID() ?>">
 	<?php if ( 'div' != $args['style'] ) { ?>
 		<div id="div-comment-<?php comment_ID() ?>" class="comment-body"><?php
-	} ?>
+	} ?>	
 
-	
-
-	<div class="comment-author vcard">
+	<div class="item-comments__img">
 		<?php
 		if ( $args['avatar_size'] != 0 ) {
 			echo get_avatar( $comment, $args['avatar_size'] );
 		}
-		printf(
-			__( '<cite class="fn">%s</cite> <span class="says">says:</span>' ),
-			get_comment_author_link()
-		);
 		?>
 	</div>
 
@@ -358,36 +352,39 @@ function ministore_comment( $comment, $args, $depth ) {
 		</em><br/>
 	<?php } ?>
 
-	<div class="comment-meta commentmetadata">
-		<a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ); ?>">
+	<div class="item-comments__body">
+		<div class="item-comments__head">
+			<?php printf( __( '<span>%s</span>' ), get_comment_author_link() ); ?>
+			<a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ); ?>">
+				<?php
+				printf(
+					__( '%1$s at %2$s' ), get_comment_date(), get_comment_time() 
+				); 
+				?>
+			</a>
+			<?php edit_comment_link( __( '(Edit)' ), '  ', '' ); ?>
+		</div>
+		<div class="item-comments__text">
+			<?php comment_text(); ?>
+		</div>
+		
+		<div class="item-comments__link">
 			<?php
-			printf(
-				__( '%1$s at %2$s' ),
-				get_comment_date(),
-				get_comment_time()
-			); ?>
-		</a>
-
-		<?php edit_comment_link( __( '(Edit)' ), '  ', '' ); ?>
-	</div>
-
-	<?php comment_text(); ?>
-
-	<div class="reply">
-		<?php
-		comment_reply_link(
-			array_merge(
-				$args,
-				array(
-					'add_below' => $add_below,
-					'depth'     => $depth,
-					'max_depth' => $args['max_depth']
+			comment_reply_link(
+				array_merge(
+					$args,
+					array(
+						'add_below' => $add_below,
+						'depth'     => $depth,
+						'max_depth' => $args['max_depth']
+					)
 				)
-			)
-		); ?>
+			); 
+			?>
+		</div>
 	</div>
 
 	<?php if ( 'div' != $args['style'] ) { ?>
-		</div>
+		<!-- </div> -->
 	<?php }
 }

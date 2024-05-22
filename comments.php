@@ -43,6 +43,7 @@ if ( post_password_required() ) {
 						'style'      => 'div',
 						'type'       => 'comment',
 						'reply_text' => 'Reply now',
+						'avatar_size'=> 105,
 						'callback'   => 'ministore_comment',
 					)
 				);
