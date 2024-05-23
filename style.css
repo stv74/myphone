@@ -871,11 +871,12 @@ textarea {
   display: -ms-flexbox;
   display: flex;
   gap: 1.25rem;
-}
-
-.item-comments:not(:last-child) {
   margin-bottom: 1.25rem;
 }
+
+/* .item-comments:not(:last-child) {
+  margin-bottom: 1.25rem;
+} */
 
 .item-comments_reply {
   margin-left: 80px;

@@ -323,68 +323,55 @@ function ministore_get_share($type = 'fb', $permalink = false, $title = false) {
 
 // Comment function
 function ministore_comment( $comment, $args, $depth ) {
-	if ( 'div' === $args['style'] ) {
-		$tag       = 'div';
-		$add_below = 'comment';
-	} else {
-		$tag       = 'li';
-		$add_below = 'div-comment';
-	}
-
-	$classes = 'comments__item item-comments';	
 	?>
-	<<?php echo $tag; ?> class="<?php echo $classes ?>" id="comment-<?php comment_ID() ?>">
-	<?php if ( 'div' != $args['style'] ) { ?>
-		<div id="div-comment-<?php comment_ID() ?>" class="comment-body"><?php
-	} ?>	
+	<div id="comment-<?php comment_ID() ?>">
+		<div class="comments__item item-comments<?php echo ( $depth > 1 ) ? ' item-comments_reply' : ''; ?>">
 
-	<div class="item-comments__img">
-		<?php
-		if ( $args['avatar_size'] != 0 ) {
-			echo get_avatar( $comment, $args['avatar_size'] );
-		}
-		?>
-	</div>
-
-	<?php if ( $comment->comment_approved == '0' ) { ?>
-		<em class="comment-awaiting-moderation">
-			<?php _e( 'Your comment is awaiting moderation.' ); ?>
-		</em><br/>
-	<?php } ?>
-
-	<div class="item-comments__body">
-		<div class="item-comments__head">
-			<?php printf( __( '<span>%s</span>' ), get_comment_author_link() ); ?>
-			<a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ); ?>">
+			<div class="item-comments__img">
 				<?php
-				printf(
-					__( '%1$s at %2$s' ), get_comment_date(), get_comment_time() 
-				); 
+				if ( $args['avatar_size'] != 0 ) {
+					echo get_avatar( $comment, $args['avatar_size'] );
+				}
 				?>
-			</a>
-			<?php edit_comment_link( __( '(Edit)' ), '  ', '' ); ?>
-		</div>
-		<div class="item-comments__text">
-			<?php comment_text(); ?>
-		</div>
-		
-		<div class="item-comments__link">
-			<?php
-			comment_reply_link(
-				array_merge(
-					$args,
-					array(
-						'add_below' => $add_below,
-						'depth'     => $depth,
-						'max_depth' => $args['max_depth']
-					)
-				)
-			); 
-			?>
-		</div>
-	</div>
+			</div>
 
-	<?php if ( 'div' != $args['style'] ) { ?>
-		<!-- </div> -->
-	<?php }
+			<?php if ( $comment->comment_approved == '0' ) { ?>
+				<em class="comment-awaiting-moderation">
+					<?php _e( 'Your comment is awaiting moderation.' ); ?>
+				</em><br/>
+			<?php } ?>
+
+			<div class="item-comments__body">
+				<div class="item-comments__head">
+					<?php printf( __( '<span>%s</span>' ), get_comment_author_link() ); ?>
+					<a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ); ?>">
+						<?php
+						printf(
+							__( '%1$s at %2$s' ), get_comment_date(), get_comment_time() 
+						); 
+						?>
+					</a>
+					<?php edit_comment_link( __( '(Edit)' ), '  ', '' ); ?>
+				</div>
+				<div class="item-comments__text">
+					<?php comment_text(); ?>
+				</div>
+				
+				<div class="item-comments__link">
+					<?php
+					comment_reply_link(
+						array_merge(
+							$args,
+							array(
+								'depth'     => $depth,
+								'max_depth' => $args['max_depth']
+							)
+						)
+					); 
+					?>
+				</div>
+			</div>
+		</div>
+
+	<?php
 }

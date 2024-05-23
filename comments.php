@@ -17,18 +17,9 @@ if ( post_password_required() ) {
 				<?php
 				$ministore_comment_count = get_comments_number();
 				if ( '1' === $ministore_comment_count ) {
-					printf(
-						/* translators: 1: title. */
-						esc_html__( 'One thought on &ldquo;%1$s&rdquo;', 'ministore' ),
-						'<span>' . wp_kses_post( get_the_title() ) . '</span>'
-					);
+					echo $ministore_comment_count . ' comment';
 				} else {
-					printf( 
-						/* translators: 1: comment count number, 2: title. */
-						esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $ministore_comment_count, 'comments title', 'ministore' ) ),
-						number_format_i18n( $ministore_comment_count ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						'<span>' . wp_kses_post( get_the_title() ) . '</span>'
-					);
+					echo $ministore_comment_count . ' comments';
 				}
 				?>
 			</h2><!-- .comments-title -->
