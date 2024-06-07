@@ -52,8 +52,21 @@ if ( post_password_required() ) {
 			endif;
 			
 		endif; // Check for have_comments().
+		
+		$comment_args = [
+			'fields'        => [],
+			'comment_field' => '<textarea id="comment" name="comment" cols="30" rows="8" class="input" aria-required="true" required="required">Write your comment here *</textarea>',
+			'title_reply'        => __( 'Leave a comments' ), 
+			'title_reply_before' => '<div class="form-comments__title title title_m">',
+			'title_reply_after'  => '</div>',
+			'title_reply_to'     => __( 'Leave a reply' ),
+			'comment_notes_before' => '<div class="form-comments__descr">Your email address will not be published. Required fields are marked *</div>',
+			'label_submit'       => __( 'Send comment' ),
+			'class_submit'       => 'form-comments__button button',
+			'class_container'    => 'comments__form form-comments'
+		];
 
-		comment_form();
+		comment_form( $comment_args );
 		?>
 
 	</div>

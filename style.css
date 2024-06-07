@@ -938,6 +938,10 @@ textarea {
   margin-bottom: 20px;
 }
 
+.comment-form-cookies-consent {
+  margin-bottom: 20px;
+}
+
 .header {
   position: fixed;
   left: 0;
@@ -4299,7 +4303,7 @@ button.swiper-pagination-bullet {
   }
 
   .form-comments__button {
-    width: 100%;
+    width: 100%;    
   }
 
   .header__buttons {

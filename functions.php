@@ -324,8 +324,8 @@ function ministore_get_share($type = 'fb', $permalink = false, $title = false) {
 // Comment function
 function ministore_comment( $comment, $args, $depth ) {
 	?>
-	<div id="comment-<?php comment_ID() ?>">
-		<div class="comments__item item-comments<?php echo ( $depth > 1 ) ? ' item-comments_reply' : ''; ?>">
+	<div id="comment-<?php comment_ID() ?>" <?php echo ( $depth > 1 ) ? 'class="item-comments_reply"' : ''; ?>>
+		<div class="comments__item item-comments">
 
 			<div class="item-comments__img">
 				<?php
